@@ -2,6 +2,7 @@ import express from "express";
 import type { Express, Request, Response } from "express";
 
 import Docker from "dockerode";
+import { rejects } from "assert";
 
 const app: Express = express();
 const docker: Docker = new Docker({ timeout: 3000 });
@@ -20,7 +21,6 @@ app.post("/", async (req: Request, res: Response) => {
     const container = await docker.createContainer({
       Image: "python:latest",
       NetworkDisabled: true,
-      Tty: true,
       Cmd: ["python", "-c", `${code}`],
     });
 
@@ -33,18 +33,25 @@ app.post("/", async (req: Request, res: Response) => {
 
     await container.start();
 
+    const stream = await container.attach({
+      stream: true,
+      stdout: true,
+      stderr: true,
+    });
+
     // wait for container to finish or timeout
     await Promise.race([container.wait(), timeout]);
 
-    const stream = await container.logs({
-      stdout: true,
-      stderr: true,
-      tail: 100,
+    // get stream stdout
+    const output: Buffer = await new Promise((resolve, reject) => {
+      stream.on("data", (data: Buffer) => {
+        resolve(data);
+      });
     });
 
     return res
       .status(200)
-      .json({ message: stream.toString("utf-8").replace(/\0/g, "") }); // remove null bytes from stream
+      .json({ message: output.toString("utf-8").replace(/\0/g, "") }); // remove null bytes from stream
   } catch (error: Error | any) {
     if (error.message === "Timeout")
       return res.status(408).json({ message: "Timeout exceeded" });
