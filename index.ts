@@ -36,27 +36,32 @@ app.post("/", async (req: Request, res: Response) => {
 
     await container.start();
 
-    const stream = await container.attach({
+    // input
+    const streamInput = await container.attach({
       stream: true,
       stdout: true,
-      stdin: true,
       stderr: true,
+      stdin: true,
     });
 
-    stream.write("hello, world!\n");
-    const output: Buffer = await new Promise((resolve, reject) => {
-      stream.on("data", (data: Buffer) => {
-        resolve(data);
-      });
-    }); // wait for container to finish or timeout
+    streamInput.write("hello, world\n");
+
+    const streamOutput = await container.attach({
+      stream: true,
+      stdout: true,
+      stderr: true,
+      stdin: false,
+    });
+
+    let output = "";
+
+    streamOutput.on("data", (chunk: Buffer) => {
+      output += chunk.toString("utf-8");
+    });
 
     await Promise.race([container.wait(), timeoutPromise]);
 
-    // get stream stdout
-
-    return res
-      .status(200)
-      .json({ message: output.toString("utf-8").replace(/\0/g, "") }); // remove null bytes from stream
+    return res.status(200).json({ message: output }); // remove null bytes from stream
   } catch (error: Error | unknown) {
     if (error instanceof Error && error.message === "Timeout") {
       return res.status(408).json({ message: "Timeout exceeded" });
@@ -64,6 +69,9 @@ app.post("/", async (req: Request, res: Response) => {
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error" });
   } finally {
+    // list all containers and kill container
+    const isRunning = (await docker.getContainer(container.id)) === container;
+    if (isRunning) await container.kill();
     await container.remove();
   }
 });
