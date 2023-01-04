@@ -21,10 +21,16 @@ app.post("/", async (req: Request, res: Response) => {
     const container = await docker.createContainer({
       Image: "python:latest",
       NetworkDisabled: true,
+      Tty: true,
       Cmd: ["python", "-c", `${code}`],
+      AttachStdin: true,
+      AttachStdout: true,
+      AttachStderr: true,
+      OpenStdin: true,
+      StdinOnce: false,
     });
 
-    const timeout = new Promise((_, reject) => {
+    const timeoutPromise = new Promise((_, reject) => {
       setTimeout(async () => {
         await container.kill();
         reject(new Error("Timeout"));
@@ -36,11 +42,13 @@ app.post("/", async (req: Request, res: Response) => {
     const stream = await container.attach({
       stream: true,
       stdout: true,
+      stdin: true,
       stderr: true,
     });
 
+    stream.write("hello, world!\n");
     // wait for container to finish or timeout
-    await Promise.race([container.wait(), timeout]);
+    await Promise.race([container.wait(), timeoutPromise]);
 
     // get stream stdout
     const output: Buffer = await new Promise((resolve, reject) => {
