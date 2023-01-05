@@ -6,7 +6,7 @@ const app: Express = express();
 const docker: Docker = new Docker({ timeout: 3000 });
 
 const TIMEOUT = 3000; // 3 seconds (in milliseconds)
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -29,7 +29,7 @@ app.post("/", async (req: Request, res: Response) => {
 
   try {
     const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(async () => {
+      setTimeout(() => {
         reject(new Error("Timeout"));
       }, TIMEOUT);
     });
@@ -39,7 +39,7 @@ app.post("/", async (req: Request, res: Response) => {
     // input
     const streamInput = await container.attach({
       stream: true,
-      stdout: true,
+      stdout: false,
       stderr: true,
       stdin: true,
     });
@@ -64,14 +64,13 @@ app.post("/", async (req: Request, res: Response) => {
     return res.status(200).json({ message: output }); // remove null bytes from stream
   } catch (error: Error | unknown) {
     if (error instanceof Error && error.message === "Timeout") {
+      await container.kill();
       return res.status(408).json({ message: "Timeout exceeded" });
     }
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error" });
   } finally {
     // list all containers and kill container
-    const isRunning = (await docker.getContainer(container.id)) === container;
-    if (isRunning) await container.kill();
     await container.remove();
   }
 });
