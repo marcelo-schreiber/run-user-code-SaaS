@@ -1,17 +1,11 @@
-import express from "express";
-import type { Express, Request, Response } from "express";
-
+import { Request, Response } from "express";
 import Docker from "dockerode";
-const app: Express = express();
+
 const docker: Docker = new Docker({ timeout: 3000 });
-
 const TIMEOUT = 3000; // 3 seconds (in milliseconds)
-const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-
-app.post("/", async (req: Request, res: Response) => {
-  const { code } = req.body;
+export const runCodeController = async (req: Request, res: Response) => {
+  const { code, input } = req.body;
 
   if (!code) return res.status(400).json({ message: "Code is required" });
 
@@ -36,15 +30,21 @@ app.post("/", async (req: Request, res: Response) => {
 
     await container.start();
 
-    // input
-    const streamInput = await container.attach({
-      stream: true,
-      stdout: false,
-      stderr: true,
-      stdin: true,
-    });
+    if (input && input !== "") {
+      // input
+      const inputs = input.split("\n");
 
-    streamInput.write("hello, world\n");
+      const streamInput = await container.attach({
+        stream: true,
+        stdout: false,
+        stderr: true,
+        stdin: true,
+      });
+
+      for (const i of inputs) {
+        streamInput.write(`${i}\n`);
+      }
+    }
 
     const streamOutput = await container.attach({
       stream: true,
@@ -73,8 +73,4 @@ app.post("/", async (req: Request, res: Response) => {
     // list all containers and kill container
     await container.remove();
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-});
+};
