@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import Docker from "dockerode";
+import { cfg as SETTINGS } from "../utils/createContainerConfig";
 
-const docker: Docker = new Docker({ timeout: 3000 });
+const docker: Docker = new Docker();
+
 const TIMEOUT = 3000; // 3 seconds (in milliseconds)
 
 export const runCodeController = async (req: Request, res: Response) => {
@@ -10,15 +12,8 @@ export const runCodeController = async (req: Request, res: Response) => {
   if (!code) return res.status(400).json({ message: "Code is required" });
 
   const container = await docker.createContainer({
-    Image: "python:latest",
-    NetworkDisabled: true,
-    Tty: true,
+    ...SETTINGS, // default container settings and quotas
     Cmd: ["python", "-c", `${code}`],
-    AttachStdin: true,
-    AttachStdout: true,
-    AttachStderr: true,
-    OpenStdin: true,
-    StdinOnce: false,
   });
 
   try {
@@ -61,16 +56,15 @@ export const runCodeController = async (req: Request, res: Response) => {
 
     await Promise.race([container.wait(), timeoutPromise]);
 
-    return res.status(200).json({ message: output }); // remove null bytes from stream
+    return res.status(200).json({ message: output });
   } catch (error: Error | unknown) {
     if (error instanceof Error && error.message === "Timeout") {
       await container.kill();
-      return res.status(408).json({ message: "Timeout exceeded" });
+      return res
+        .status(408)
+        .json({ message: `Timeout of ${TIMEOUT} exceeded` });
     }
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error" });
-  } finally {
-    // list all containers and kill container
-    await container.remove();
   }
 };
