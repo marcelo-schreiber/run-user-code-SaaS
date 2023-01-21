@@ -1,5 +1,5 @@
 [phases.setup]
-aptPkgs = ["...", "docker"]   # Install the wget package with apt-get
+aptPkgs = ["...", "docker"]   # Install the docker package with apt-get
 
 [phases.build]
-cmds = ["docker pull python:latest"]
+cmds = ["docker pull python:latest"] # pull docker image
