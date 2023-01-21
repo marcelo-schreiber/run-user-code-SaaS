@@ -22,7 +22,7 @@
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
 | `code` | `string` | **Obrigatório**. Código|
-| `input` | `string` | **Obrigatório**. `stdin` separado por `\n`|
+| `input` | `string` | **Opcional**. `stdin` separado por `\n`|
 
 
 ## Deploy
