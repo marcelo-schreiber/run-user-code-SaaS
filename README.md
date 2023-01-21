@@ -53,7 +53,7 @@ while True:
 Evitando o laço infinito e a deleção de arquivos no servidor.
   
   Outra possíveis vulnerabilidades como instalação de arquivos ou saídas do container são escapadas por meio da limitação de memória RAM, processamento e a remoção de privilégios, rede e escritas em disco (mesmo dentro do container). 
-  Dessa maneira, remove-se grande parte das fragilidades.
+  Dessa maneira, remove-se grande parte das fragilidades, principalmente em conjunto com o rate limiter e o load balancer.
 ## Licença
 
 [MIT](https://choosealicense.com/licenses/mit/)
