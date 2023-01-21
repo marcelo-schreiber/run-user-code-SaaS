@@ -30,7 +30,7 @@
 Para fazer o deploy desse projeto, tenha certeza de ter [Docker](https://www.docker.com/) e a imagem python instaladas, depois, rode:
 
 ```bash
-  npm i && npm run start
+  npm i && npm start
 ```
 
 Com isso, recomenda-se acrescentar um rate limiter e load balancer com Nginx, por exemplo.
