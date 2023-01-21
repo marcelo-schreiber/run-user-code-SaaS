@@ -49,8 +49,8 @@ ou
 while True: 
     pass
 ```
-**A cada requisição** do usuário **cria-se um container**, uma 'máquina virtual' que se fecha ao final da execução do programa ou em 3 segundos.
-Evitando o laço infinito ou a deleção de arquivos no servidor.
+**A cada requisição** do usuário **cria-se um container**, uma 'máquina virtual', que se fecha ao final da execução do programa ou após 3 segundos.
+Evitando o laço infinito e a deleção de arquivos no servidor.
   
   Outra possíveis vulnerabilidades como instalação de arquivos ou saídas do container são escapadas por meio da limitação de memória RAM, processamento e a remoção de privilégios, rede e escritas em disco (mesmo dentro do container). 
   Dessa maneira, remove-se grande parte das fragilidades.
