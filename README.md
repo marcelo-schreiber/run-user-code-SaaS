@@ -25,17 +25,6 @@
 | `input` | `string` | **Opcional**. `stdin` separado por `\n`|
 
 
-## Deploy
-
-Para fazer o deploy desse projeto, tenha certeza de ter [Docker](https://www.docker.com/) e a imagem python instaladas, depois, rode:
-
-```bash
-  npm i && npm start
-```
-
-Com isso, recomenda-se acrescentar um rate limiter e load balancer com Nginx, por exemplo.
-
-
 ## Por que Docker? O que poderia dar errado?
 
 Com a intenção de rodar o código do usuário seguramente, entende-se que ele não poderá ter qualquer interação com os dados e arquivos do servidor.
@@ -54,6 +43,19 @@ Evitando o laço infinito e a deleção de arquivos no servidor.
   
   Outra possíveis vulnerabilidades como instalação de arquivos ou saídas do container são escapadas por meio da limitação de memória RAM, processamento e a remoção de privilégios, rede e escritas em disco (mesmo dentro do container). 
   Dessa maneira, remove-se grande parte das fragilidades, principalmente em conjunto com o rate limiter e o load balancer.
+
+## Deploy
+
+Para fazer o deploy desse projeto, tenha certeza de ter [Docker](https://www.docker.com/) e a imagem python instaladas, depois, rode:
+
+```bash
+  npm i && npm start
+```
+
+Com isso, recomenda-se acrescentar um rate limiter e load balancer com Nginx, por exemplo.
+
+
+
 ## Licença
 
 [MIT](https://choosealicense.com/licenses/mit/)
