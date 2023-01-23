@@ -46,8 +46,13 @@ Evitando o laço infinito e a deleção de arquivos no servidor.
 
 ## Deploy
 
-Para fazer o deploy desse projeto, tenha certeza de ter [Docker](https://www.docker.com/) e a imagem python instaladas, depois, rode:
+Para fazer o deploy desse projeto, tenha certeza de ter [Docker](https://www.docker.com/) e [Node.js](https://nodejs.org/en/) instalados, depois, rode:
 
+Puxa a imagem Python
+```bash
+  docker image pull python:latest
+```
+Instala dependencias e inicia o servidor
 ```bash
   npm i && npm start
 ```
