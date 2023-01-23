@@ -4,12 +4,11 @@
 
 
 
-## Referência
+## Referência e inspirações
 
- - [Tim Nolet](https://www.freecodecamp.org/news/running-untrusted-javascript-as-a-saas-is-hard-this-is-how-i-tamed-the-demons-973870f76e1c/), FreeCodeCamp
-
-
-
+- [Tim Nolet](https://www.freecodecamp.org/news/running-untrusted-javascript-as-a-saas-is-hard-this-is-how-i-tamed-the-demons-973870f76e1c/), FreeCodeCamp
+- [Documentação Dockerode](https://github.com/apocas/dockerode)
+- [Codex API](https://github.com/Jaagrav/CodeX-API)
 
 ## Documentação da API
 
