@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import Docker from "dockerode";
 import { cfg as SETTINGS } from "../utils/createContainerConfig";
 
-const docker: Docker = new Docker();
+const docker: Docker = new Docker({
+  socketPath: '//.pipe/docker_engine'
+});
 
 const TIMEOUT = 3000; // 3 seconds (in milliseconds)
 
