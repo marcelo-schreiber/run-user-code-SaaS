@@ -101,7 +101,7 @@ To run the tests, run the following command:
 
 | Paramter   | Type       | Description                           |
 | :---------- | :--------- | :---------------------------------- |
-| `code` | `string` | **Mandatory**. Código|
+| `code` | `string` | **Mandatory**.|
 | `input` | `string` | **Optional**. `stdin` separated by `\n`|
 
 ## Why Docker? What could go wrong?
