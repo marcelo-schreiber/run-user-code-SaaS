@@ -13,4 +13,7 @@ COPY . .
 
 EXPOSE 3000
 
+# Add Docker socket volume
+VOLUME /var/run/docker.sock /var/run/docker.sock
+
 CMD ["npm", "start"]
