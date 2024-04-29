@@ -80,9 +80,7 @@ const app = new Elysia()
           // prevent memory leaks
           await container.stop();
           await container.remove();
-        } catch (e) {
-          console.error(e);
-        }
+        } catch (e) {}
       }
     },
     {
