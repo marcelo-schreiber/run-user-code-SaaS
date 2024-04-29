@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import "../src/index";
+import "../index";
 
 test("404 check", async () => {
   const response = await fetch("http://localhost:3000/404");
