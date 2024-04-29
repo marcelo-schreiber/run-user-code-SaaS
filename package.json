@@ -8,6 +8,7 @@
     "node": ">=20.6.0"
   },
   "scripts": {
+    "test": "vitest",
     "dev": "node --no-warnings --watch -r ts-node/register src/index.ts",
     "start": "tsc && node dist/index.js"
   },
@@ -20,7 +21,8 @@
     "@types/dockerode": "^3.3.28",
     "bun-types": "latest",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^1.5.2"
   },
   "module": "src/index.js"
 }
