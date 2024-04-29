@@ -1,27 +1,26 @@
 {
   "name": "run-user-code-saas",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "run user code safely",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit p1",
-    "start": "tsc && node dist/index.js",
-    "dev": "ts-node src/index.ts"
-  },
   "author": "marcelo-schreiber",
   "license": "MIT",
+  "engines": {
+    "node": ">=20.6.0"
+  },
+  "scripts": {
+    "dev": "node --no-warnings --watch -r ts-node/register src/index.ts",
+    "start": "tsc && node dist/index.js"
+  },
   "dependencies": {
-    "dockerode": "^3.3.4",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "ts-node": "^10.9.1"
+    "@bogeychan/elysia-polyfills": "^0.6.4",
+    "dockerode": "^4.0.2",
+    "elysia": "^1.0.15"
   },
   "devDependencies": {
-    "@types/dockerode": "^3.3.14",
-    "@types/express": "^4.17.15",
-    "@types/node": "^18.11.18",
-    "concurrently": "^7.6.0",
-    "nodemon": "^2.0.20",
-    "typescript": "^4.9.4"
-  }
+    "@types/dockerode": "^3.3.28",
+    "bun-types": "latest",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "module": "src/index.js"
 }

@@ -1,4 +1,6 @@
-export const cfg = {
+import type Docker from "dockerode";
+
+export const cfg: Docker.ContainerCreateOptions = {
   Image: "python:latest",
   NetworkDisabled: true,
   Tty: true,
