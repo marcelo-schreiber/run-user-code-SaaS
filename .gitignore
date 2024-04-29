@@ -38,3 +38,4 @@ package-lock.json
 **/*.bun
 
 /dist
+gh-md-toc

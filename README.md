@@ -2,28 +2,28 @@
 
 <p id="start" align="center">
 <a href="#start">
-  <img height="130rem" align="center" src="https://raw.githubusercontent.com/marcelo-schreiber/run-user-code-SaaS/master/img/logo.jpg">
+  <img height="130rem" align="center" src="https://raw.githubusercontent.com/marcelo-schreiber/run-user-code-SaaS/master/img/logo.jpg" alt="logo">
 </a>
 <br>
 <br>
 <a href="https://github.com/marcelo-schreiber/run-user-code-SaaS/blob/master/LICENSE.md">
-  <img src="https://img.shields.io/github/license/marcelo-schreiber/run-user-code-SaaS?style=for-the-badge"  align="center" alt="License" />
+  <img src="https://img.shields.io/github/license/marcelo-schreiber/run-user-code-SaaS?style=for-the-badge"  align="center" alt="License MIT" />
 </a>
 </p>
 
 ## Table of Contents
 
-* [API For Python Execution](#api-for-python-execution)
-  * [Getting Started](#getting-started)
-    * [Pre requisites](#pre-requisites)
-    * [Installation](#installation)
-      * [Run with docker](#run-with-docker)
-      * [Run in production](#run-in-production)
-    * [Testing](#testing)
-  * [API Reference](#api-reference)
-  * [Why Docker? What could go wrong?](#why-docker-what-could-go-wrong)
-  * [Inspirations and References](#inspirations-and-references)
-  * [Feedback](#feedback)
+* [Getting Started](#getting-started)
+  * [Pre requisites](#pre-requisites)
+  * [Installation](#installation)
+  * [Run with docker](#run-with-docker)
+  * [Run in production](#run-in-production)
+* [Testing](#testing)
+* [API Reference](#api-reference)
+  * [Returns python code output](#returns-python-code-output)
+* [Why Docker? What could go wrong?](#why-docker-what-could-go-wrong)
+* [Inspirations and References](#inspirations-and-references)
+* [Feedback](#feedback)
 
 ## Getting Started
 
@@ -57,7 +57,7 @@ Your server will be running at `http://localhost:3000`. You can test it with the
   curl -X POST http://localhost:3000 -H "Content-Type: application/json" -d '{"code": "print('Hello, World!')"}'
 ```
 
-#### Run with docker
+### Run with docker
 
 Pull the latest python image
 
@@ -77,13 +77,13 @@ Run the docker image
   docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name python-exec python-exec
 ```
 
-#### Run in production
+### Run in production
 
 ```bash
   npm start
 ```
 
-### Testing
+## Testing
 
 To run the tests, run the following command:
 
