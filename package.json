@@ -9,20 +9,20 @@
   },
   "scripts": {
     "test": "vitest",
-    "dev": "node --no-warnings --watch -r ts-node/register src/index.ts",
-    "start": "tsc && node dist/index.js"
+    "dev": "node --watch -r ts-node/register src/index.ts",
+    "start": "tsc && node dist/src/index.js"
   },
   "dependencies": {
-    "@bogeychan/elysia-polyfills": "^0.6.4",
     "dockerode": "^4.0.2",
-    "elysia": "^1.0.15"
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0"
   },
   "devDependencies": {
     "@types/dockerode": "^3.3.28",
-    "bun-types": "latest",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5",
-    "vitest": "^1.5.2"
-  },
-  "module": "src/index.js"
+    "vitest": "^1.5.2",
+    "typescript": "^5.4.5"
+  }
 }

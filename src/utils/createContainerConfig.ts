@@ -1,7 +1,7 @@
 import type Docker from "dockerode";
 
 export const cfg: Docker.ContainerCreateOptions = {
-  Image: "python:latest",
+  Image: "python:3.9-slim",
   NetworkDisabled: true,
   Tty: true,
   AttachStdin: true,
@@ -15,8 +15,7 @@ export const cfg: Docker.ContainerCreateOptions = {
     MemorySwap: 150000000, // 150 MB
     DiskQuota: 0,
     IpcMode: "private",
-    CpuPercent: 25, // 25% of CPU
-    CpuQuota: 100000 / 4, // 25% of CPU
+    CpuPercent: 20, // 20% of CPU
     CapDrop: ["ALL"],
     AutoRemove: true,
     ReadonlyRootfs: true,

@@ -1,15 +1,17 @@
 import { expect, test } from "vitest";
 
-import "../index";
+import { PORT } from "../src/index";
+
+import "../src/index"; // runs server
 
 test("404 check", async () => {
-  const response = await fetch("http://localhost:3000/404");
+  const response = await fetch(`http://localhost:${PORT}/404`);
 
   expect(response.status).toBe(404);
 });
 
 test("run code without input", async () => {
-  const response = await fetch("http://localhost:3000/", {
+  const response = await fetch(`http://localhost:${PORT}/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +27,7 @@ test("run code without input", async () => {
 });
 
 test("run code with input", async () => {
-  const response = await fetch("http://localhost:3000/", {
+  const response = await fetch(`http://localhost:${PORT}/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
