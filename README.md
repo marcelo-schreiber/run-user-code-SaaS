@@ -33,10 +33,10 @@ Make sure you have [Docker](https://www.docker.com/) e [Node.js](https://nodejs.
 
 ### Installation
 
-Pull the latest python image
+Pull the 3.9-slim python image
 
 ```bash
-  docker image pull python:latest
+  docker image pull python:3.9-slim
 ```
 
 Install all dependencies
@@ -59,10 +59,10 @@ Your server will be running at `http://localhost:3000`. You can test it with the
 
 ### Run with docker
 
-Pull the latest python image
+Pull the 3.9-slim python image
 
 ```bash
-  docker image pull python:latest
+  docker image pull python:3.9-slim
 ```
 
 Create a docker image
@@ -111,21 +111,21 @@ In this sense, to avoid a vulnerability such as:
 
 ```python
 import os
-os.system('rm -rf /')
+os.system('shutdown -f') # shutdown the server
 ```
 
 or
 
 ```python
 while True: 
-    pass
+    pass # A thread is blocked forever
 ```
 
 **With each user request**, a **container** is created (similar to a virtual machine) which closes at the end of the program execution or after 3 seconds.
 Avoiding infinite loops and file deletion on the server.
   
 Other possible vulnerabilities such as file installation or container exits are escaped by limiting RAM memory, processing. Also, It removes privileges, network and disk writes (even within the container).
-In this way, a large part of the weaknesses are removed, especially in conjunction with a rate limiter.
+In this way, a large part of the weaknesses are removed, especially in conjunction with a rate limiter (by IP, by Path, etc), load balancer, a queue system such that the server can run more than one container at a time and other security measures.
 
 ## Inspirations and References
 
