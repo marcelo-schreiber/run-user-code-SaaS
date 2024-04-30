@@ -40,7 +40,7 @@ Pull the 3.9-slim python image
   docker image pull python:3.9-slim
 ```
 
-Install all dependencies
+In the project folder, install all dependencies
 
 ```bash
   npm i
@@ -50,12 +50,6 @@ Start the server in development mode, every change in the code will restart the 
 
 ```bash
   npm run dev
-```
-
-Your server will be running at `http://localhost:3000`. You can test it with the following command:
-
-```bash
-  curl -X POST http://localhost:3000 -H "Content-Type: application/json" -d '{"code": "print('Hello, World!')"}'
 ```
 
 ### Run with docker
@@ -76,6 +70,20 @@ Run the docker image
 
 ```bash
   docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name python-exec python-exec
+```
+
+#### Docker commands
+
+To stop the container
+
+```bash
+  docker stop python-exec
+```
+
+To remove the container
+
+```bash
+  docker rm python-exec
 ```
 
 ### Run in production
