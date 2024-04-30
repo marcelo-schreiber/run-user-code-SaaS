@@ -23,6 +23,7 @@
   * [Returns python code output](#returns-python-code-output)
 * [Why Docker? What could go wrong?](#why-docker-what-could-go-wrong)
 * [Inspirations and References](#inspirations-and-references)
+* [Technologies](#technologies)
 * [Feedback](#feedback)
 
 ## Getting Started
@@ -131,6 +132,14 @@ In this way, a large part of the weaknesses are removed, especially in conjuncti
 
 * [Tim Nolet](https://www.freecodecamp.org/news/running-untrusted-javascript-as-a-saas-is-hard-this-is-how-i-tamed-the-demons-973870f76e1c/) - [@FreeCodeCamp](https://www.freecodecamp.org/)
 * [Codex API](https://github.com/Jaagrav/CodeX-API) - [Jaagrav](https://github.com/Jaagrav)
+
+## Technologies
+
+* [Docker](https://www.docker.com/)
+* [Typescript](https://www.typescriptlang.org/)
+* [Node.js](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
+* [Vitest](https://vitest.dev/)
 
 ## Feedback
 
