@@ -1,0 +1,15 @@
+name: Testing Backend 🧪
+run-name: Test Backend
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - run: docker pull python:3.9-slim
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+      
