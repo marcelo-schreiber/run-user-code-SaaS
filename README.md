@@ -1,7 +1,7 @@
 # API For Code Execution
 
-![MIT License](https://img.shields.io/github/license/marcelo-schreiber/run-user-code-SaaS?style=social?logo=github)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/marcelo-schreiber/run-user-code-SaaS/test-backend.yml?style=social?logo=github)
+[![MIT License](https://img.shields.io/github/license/marcelo-schreiber/run-user-code-SaaS?style=social?logo=github)](https://github.com/marcelo-schreiber/run-user-code-SaaS/blob/main/LICENSE)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/marcelo-schreiber/run-user-code-SaaS/test-backend.yml?style=social?logo=github)](https://github.com/marcelo-schreiber/run-user-code-SaaS/actions/workflows/test-backend.yml)
 
 This is an API for running code in different languages, such as Python, Javascript and Ruby. It uses Docker to run the code in a safe environment, avoiding vulnerabilities and security breaches.
 
