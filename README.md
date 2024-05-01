@@ -5,6 +5,23 @@
 
 This is an API for running code in different languages, such as Python, Javascript and Ruby. It uses Docker to run the code in a safe environment, avoiding vulnerabilities and security breaches.
 
+## Table of Contents
+
+* [Getting Started](#getting-started)
+  * [Pre requisites](#pre-requisites)
+  * [Installation](#installation)
+  * [Run with docker](#run-with-docker)
+  * [Run in production](#run-in-production)
+* [Testing](#testing)
+* [API Reference](#api-reference)
+  * [Returns python code output](#returns-python-code-output)
+  * [Returns javacript code output](#returns-javacript-code-output)
+  * [Returns ruby code output](#returns-ruby-code-output)
+* [Why Docker? What could go wrong?](#why-docker-what-could-go-wrong)
+* [Inspirations and References](#inspirations-and-references)
+* [Technologies](#technologies)
+* [Feedback](#feedback)
+
 ## Getting Started
 
 ### Pre requisites
