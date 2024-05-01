@@ -1,7 +1,21 @@
 import type Docker from "dockerode";
 
+export const codeConfig = {
+  python: {
+    image: "python:3.9-slim",
+    cmd: ["python", "-c"],
+  },
+  javascript: {
+    image: "node:14-slim",
+    cmd: ["node", "-e"],
+  },
+  ruby: {
+    image: "ruby:3.0-slim",
+    cmd: ["ruby", "-e"],
+  },
+};
+
 export const cfg: Docker.ContainerCreateOptions = {
-  Image: "python:3.9-slim",
   NetworkDisabled: true,
   Tty: true,
   AttachStdin: true,
@@ -21,4 +35,5 @@ export const cfg: Docker.ContainerCreateOptions = {
     ReadonlyRootfs: true,
     Privileged: false,
   },
+  ArgsEscaped: true,
 };
