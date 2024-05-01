@@ -57,20 +57,6 @@ Run the docker image:
   docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name code-exec code-exec
 ```
 
-#### Docker commands
-
-To stop the container:
-
-```bash
-  docker stop code-exec
-```
-
-To remove the container:
-
-```bash
-  docker rm code-exec
-```
-
 ### Run in production
 
 Follow the installation steps, then run the following command instead of `npm run dev`:
