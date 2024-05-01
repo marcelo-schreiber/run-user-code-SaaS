@@ -1,30 +1,9 @@
-# API For Python Execution
+# API For Code Execution
 
-<p id="start" align="center">
-<a href="#start">
-  <img height="130rem" align="center" src="https://raw.githubusercontent.com/marcelo-schreiber/run-user-code-SaaS/master/img/logo.jpg" alt="logo">
-</a>
-<br>
-<br>
-<a href="https://github.com/marcelo-schreiber/run-user-code-SaaS/blob/master/LICENSE.md">
-  <img src="https://img.shields.io/github/license/marcelo-schreiber/run-user-code-SaaS?style=for-the-badge"  align="center" alt="License MIT" />
-</a>
-</p>
+![MIT License](https://img.shields.io/github/license/marcelo-schreiber/run-user-code-SaaS?style=social?logo=github)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/marcelo-schreiber/run-user-code-SaaS/test-backend.yml?style=social?logo=github)
 
-## Table of Contents
-
-* [Getting Started](#getting-started)
-  * [Pre requisites](#pre-requisites)
-  * [Installation](#installation)
-  * [Run with docker](#run-with-docker)
-  * [Run in production](#run-in-production)
-* [Testing](#testing)
-* [API Reference](#api-reference)
-  * [Returns python code output](#returns-python-code-output)
-* [Why Docker? What could go wrong?](#why-docker-what-could-go-wrong)
-* [Inspirations and References](#inspirations-and-references)
-* [Technologies](#technologies)
-* [Feedback](#feedback)
+This is an API for running code in different languages, such as Python, Javascript and Ruby. It uses Docker to run the code in a safe environment, avoiding vulnerabilities and security breaches.
 
 ## Getting Started
 
@@ -34,19 +13,19 @@ Make sure you have [Docker](https://www.docker.com/) e [Node.js](https://nodejs.
 
 ### Installation
 
-Pull the 3.9-slim python image
+In the project folder, install all dependencies:
 
 ```bash
-  docker image pull python:3.9-slim
+  npm install
 ```
 
-In the project folder, install all dependencies
+Pull the docker images, make sure your docker cli works without sudo:
 
 ```bash
-  npm i
+  npm run pull-images
 ```
 
-Start the server in development mode, every change in the code will restart the server
+Start the server in development mode, every change in the code will restart the server:
 
 ```bash
   npm run dev
@@ -54,39 +33,47 @@ Start the server in development mode, every change in the code will restart the 
 
 ### Run with docker
 
-Pull the 3.9-slim python image
+In the project folder, install all dependencies:
 
 ```bash
-  docker image pull python:3.9-slim
+  npm install
 ```
 
-Create a docker image
+Pull the docker images, make sure your docker CLI works without sudo:
 
 ```bash
-  docker build -t python-exec .
+  npm run pull-images
 ```
 
-Run the docker image
+Create a docker image:
 
 ```bash
-  docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name python-exec python-exec
+  docker build -t code-exec .
+```
+
+Run the docker image:
+
+```bash
+  docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock --name code-exec code-exec
 ```
 
 #### Docker commands
 
-To stop the container
+To stop the container:
 
 ```bash
-  docker stop python-exec
+  docker stop code-exec
 ```
 
-To remove the container
+To remove the container:
 
 ```bash
-  docker rm python-exec
+  docker rm code-exec
 ```
 
 ### Run in production
+
+Follow the installation steps, then run the following command instead of `npm run dev`:
 
 ```bash
   npm start
@@ -100,12 +87,35 @@ To run the tests, run the following command:
   npm test
 ```
 
+Make sure you have installed all dependencies before running the tests.
+
 ## API Reference
 
 ### Returns python code output
 
 ```http
-  POST /
+  POST /run/python
+```
+
+| Paramter   | Type       | Description                           |
+| :---------- | :--------- | :---------------------------------- |
+| `code` | `string` | **Mandatory**.|
+| `input` | `string` | **Optional**. `stdin` separated by `\n`|
+
+### Returns javacript code output
+
+```http
+  POST /run/javascript
+```
+
+| Paramter   | Type       | Description                           |
+| :---------- | :--------- | :---------------------------------- |
+| `code` | `string` | **Mandatory**.|
+
+### Returns ruby code output
+
+```http
+  POST /run/ruby
 ```
 
 | Paramter   | Type       | Description                           |
@@ -125,13 +135,17 @@ os.system('shutdown -f') # shutdown the server
 
 or
 
-```python
-while True: 
-    pass # A thread is blocked forever
+```javascript
+while (true) {} // infinite loop
 ```
 
-**With each user request**, a **container** is created (similar to a virtual machine) which closes at the end of the program execution or after 3 seconds.
-Avoiding infinite loops and file deletion on the server.
+or
+
+```ruby
+File.delete('important_file.txt') # delete a file
+```
+
+**With each user request**, a **container** is created (similar to a virtual machine) which closes at the end of the program execution or after 3 seconds, avoiding infinite loops.
   
 Other possible vulnerabilities such as file installation or container exits are escaped by limiting RAM memory, processing. Also, It removes privileges, network and disk writes (even within the container).
 In this way, a large part of the weaknesses are removed, especially in conjunction with a rate limiter (by IP, by Path, etc), load balancer, a queue system such that the server can run more than one container at a time and other security measures.

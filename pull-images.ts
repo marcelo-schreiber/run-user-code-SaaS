@@ -2,7 +2,6 @@ import { $ } from "bun";
 
 import { codeConfig } from "./src/utils/createContainerConfig";
 
-
 async function pullImages() {
   let key: keyof typeof codeConfig;
 
