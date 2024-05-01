@@ -89,6 +89,7 @@ export async function runCode(request: Request, response: Response) {
   } finally {
     try {
       // prevent memory leaks
+      await container.kill();
       await container.stop();
       await container.remove();
     } catch (e) {}
