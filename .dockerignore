@@ -1,7 +1,17 @@
+# node
 node_modules
-.DS_Store
+
+# git
 .git
 .gitignore
+.github
+
+# markdown
 LICENSE.md
 README.md
+
+# typescript
 dist
+
+# mac
+.DS_Store
