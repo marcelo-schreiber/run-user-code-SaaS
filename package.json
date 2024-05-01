@@ -11,7 +11,7 @@
     "test": "vitest",
     "dev": "node --watch -r ts-node/register src/index.ts",
     "start": "tsc && node dist/src/index.js",
-    "pull-images": "bun pull-images.js"
+    "pull-images": "bun pull-images.ts"
   },
   "dependencies": {
     "dockerode": "^4.0.2",
