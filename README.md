@@ -133,7 +133,7 @@ File.delete('important_file.txt') # delete a file
 
 **With each user request**, a **container** is created (similar to a virtual machine) which closes at the end of the program execution or after 3 seconds, avoiding infinite loops.
   
-Other possible vulnerabilities such as file installation or container exits are escaped by limiting RAM memory, processing. Also, It removes privileges, network and disk writes (even within the container).
+Other possible vulnerabilities such as file installation or container exits are escaped by limiting RAM memory and processing. Also, It removes privileges, network and disk writes (even within the container).
 In this way, a large part of the weaknesses are removed, especially in conjunction with a rate limiter (by IP, by Path, etc), load balancer, a queue system such that the server can run more than one container at a time and other security measures.
 
 ## Inspirations and References
