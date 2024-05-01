@@ -2,11 +2,13 @@ name: Backend setup and test 🧪
 run-name: Backend setup and test
 on: [push, pull_request]
 jobs:
-  Explore-GitHub-Actions:
+  Install-Dependencies-And-Run-Tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
       - name: Install dependencies
         run: npm install
       - name: Pull images
