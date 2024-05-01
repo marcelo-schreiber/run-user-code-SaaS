@@ -2,13 +2,15 @@ import { $ } from "bun";
 
 import { codeConfig } from "./src/utils/createContainerConfig";
 
-for (const key in codeConfig) {
+let key: keyof typeof codeConfig;
+
+for (key in codeConfig) {
   const image = codeConfig[key].image;
   try {
-    await $`docker pull ${codeConfig[key].image}`;
+    $`docker pull ${codeConfig[key].image}`;
   } catch (error) {
     console.error(`Error pulling image: ${image}`, error);
   }
 }
 
-// Path: pull-images.js
+// Path: pull-images.ts

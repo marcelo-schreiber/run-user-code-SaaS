@@ -13,7 +13,7 @@ export const codeConfig = {
     image: "ruby:3.0-slim",
     cmd: ["ruby", "-e"],
   },
-};
+} as const;
 
 export const cfg: Docker.ContainerCreateOptions = {
   NetworkDisabled: true,
