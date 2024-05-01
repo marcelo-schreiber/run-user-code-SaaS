@@ -1,5 +1,4 @@
-import { $ } from "bun";
-
+import { execSync } from "node:child_process";
 import { codeConfig } from "./src/utils/createContainerConfig";
 
 async function pullImages() {
@@ -8,7 +7,8 @@ async function pullImages() {
   for (key in codeConfig) {
     const image = codeConfig[key].image;
     try {
-      await $`docker pull ${codeConfig[key].image}`;
+      execSync(`docker pull ${image}`);
+      console.log(`Pulled image: ${image}`);
     } catch (error) {
       console.error(`Error pulling image: ${image}`, error);
     }
@@ -16,4 +16,4 @@ async function pullImages() {
 }
 
 pullImages();
-// Path: pull-images.ts
+// Path: pull-images.js
